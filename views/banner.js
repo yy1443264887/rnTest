@@ -38,7 +38,6 @@ export default class SwiperComponent extends Component {
       activeDotColor='#FF5771'
       autoplay={true}
       showsPagination={false}
-      autoplayTimeout='2.5'
       >
         <View style={styles.slide1}>
           <Image source={require('../assets/banner.png')} resizeMode='contain' style={{width:'100%'}}></Image>
