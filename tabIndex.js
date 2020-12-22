@@ -1,9 +1,14 @@
 import 'react-native-gesture-handler';
-import React from 'react';
+import React, { Component } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Home from './views/home'
+import Home from './views/home';
+import Care from './views/care';
+import {RNCamera} from 'react-native-camera';
+import Message from './views/Message';
+import Mine from './views/Mine'
+import Camera from './views/takePhoto';
 import {
   SafeAreaView,
   StyleSheet,
@@ -12,44 +17,33 @@ import {
   Text,
   StatusBar,
   Button,
-  Image
+  Image,
+  TouchableOpacity,
+  
 } from 'react-native';
 
-function Rember({ navigation }) {
-  return (
-    <View>
-      <Text style={styles.tt}>
-        我是记录
-      </Text>
-    </View>
-   );
-}
-function Care({ navigation }) {
-  return (
-    <View>
-      <Text style={styles.tt}>
-        我是消息
-      </Text>
-    </View>
-   );
-}
-function News({ navigation }) {
-  return (
-    <View>
-      <Text style={styles.tt}>
-        我是我的
-      </Text>
-    </View>
-   );
-}
-function Mine({ navigation }) {
-  return (
-    <View>
-      <Text style={styles.tt}>
-        MENU4
-      </Text>
-    </View>
-   );
+
+class Rember extends Component{
+  constructor(props){
+    super(props)
+      this.state={
+        k:1
+      }
+  }
+  componentDidMount=()=>{
+    this.setState({k:!this.state.k})
+  }
+  render(){
+    this.props.navigation.navigate('Camera')
+    return (
+      <View>
+        <Text style={styles.tt}>
+          我是记录
+        </Text>
+      </View>
+     );
+  }
+  
 }
 
 const Stack = createStackNavigator();
@@ -119,12 +113,13 @@ options={{
 tabBarOptions={{
         activeTintColor: '#FF5771',
         inactiveTintColor: 'black',
+        style:{backgroundColor:'rgb(255,255,255)'}
       }}
       >
       <Tab.Screen name="首页" component={Home} />
       <Tab.Screen name="关注" component={Care} />
-      <Tab.Screen name="记录" component={Rember} />
-      <Tab.Screen name="消息" component={News} />
+      <Tab.Screen name="记录" component={Camera}/>
+      <Tab.Screen name="消息" component={Message} />
       <Tab.Screen name="我的" component={Mine} />
       </Tab.Navigator>
 
@@ -139,7 +134,28 @@ const styles = StyleSheet.create({
     fontSize:40,
     color:'lightblue',
     lineHeight:600
-  }
+  },
+  container: {
+    flex: 1,
+    flexDirection: 'column',
+    backgroundColor: 'black',
+  },
+  preview: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+  },
+  capture: {
+    flex: 0,
+    backgroundColor: '#fff',
+    // padding: 15,
+    paddingHorizontal: 20,
+    alignSelf: 'center',
+    margin: 20,
+    borderRadius:50,
+    width:60,
+    height:60
+  },
 });
 
 export default Menu;

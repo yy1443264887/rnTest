@@ -15,7 +15,7 @@ import {
     TextInput,
     ImageBackground,
     Alert,
-    TouchableOpacity
+    TouchableOpacity,
 } from 'react-native'
 import Banner from './banner';
 
@@ -28,7 +28,7 @@ class Hindex extends Component{
             titc:this.props.titc,
             navigator:this.props.navigation,
         }
-        console.log('fff',this.props)
+        // console.log('fff',this.props)
     }
 
     render(){
@@ -36,10 +36,10 @@ class Hindex extends Component{
             case '0':
                 return(
                     <View>
+                        <StatusBar backgroundColor={'white'} barStyle={'dark-content'} translucent={false} />
                         <View style={{width:'100%',height:250,marginTop:15}}>
                         <Banner ></Banner>
                         </View>
-                        
                     <View style={{width:'100%',marginTop:9,flexDirection:'row',display:'flex',justifyContent:'space-between'}}>
                         <Text style={{fontSize:17,color:'#333333',paddingLeft:12,}}>推荐</Text>
                         <Text style={{fontSize:15,color:'#666666',paddingLeft:12,}} onPress={()=>this.state.navigator('TjMore')}>查看更多 ></Text>
@@ -351,7 +351,7 @@ class Hindex extends Component{
             </View>
             <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} >
                 <View style={style.titBox}>
-                {this.state.tit.map((i,index)=><Text key={index} style={index==this.state.titc?style.tit:style.titc} onPress={()=>this.setState({titc:String(index) })}>{i}</Text>)}
+                {this.state.tit.map((i,index)=><Text key={index} style={index==this.state.titc?style.tit:style.titc} onPress={()=>{console.log(this),this.setState({titc:String(index) })}}>{i}</Text>)}
                 </View>
             </ScrollView>
             
